@@ -12,7 +12,7 @@ struct LandmarksApp: App {
     @StateObject private var model = ModelData()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Home()
                 .environmentObject(model)
         }
     }
