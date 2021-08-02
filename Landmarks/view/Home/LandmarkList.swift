@@ -28,10 +28,30 @@ struct LandmarkList: View {
                     NavigationLink(
                         destination: LandmarkDetail(landmark: landmark)) {
                         LandmarkRow(landmark: landmark)
+                            .contextMenu {
+                                Button(action : {
+                                    self.setFavorite(item: landmark)
+                                }) {
+                                    HStack {
+                                        Text(landmark.isFavorite ?
+                                                "Un Favorite" : "Favorite")
+                                        Image(systemName: landmark.isFavorite ? "star.fill": "star")
+                                            .foregroundColor(landmark.isFavorite ? Color.yellow : Color.gray)
+                                    }
+                                }
+                            }
                     }
                 }
             }
             .navigationTitle("Landmarks")
+        }
+    }
+    
+    
+    private func setFavorite(item landmark: Landmark) {
+        if let index = self.modelData.landMarks
+            .firstIndex(where: {$0.id == landmark.id}) {
+            self.modelData.landMarks[index].isFavorite.toggle()
         }
     }
 }
