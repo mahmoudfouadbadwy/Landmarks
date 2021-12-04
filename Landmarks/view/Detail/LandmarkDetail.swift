@@ -12,7 +12,7 @@ struct LandmarkDetail: View {
     @EnvironmentObject var modelData: ModelData
     var landmark: Landmark
     
-    var landmarkIndex: Int {
+    private var landmarkIndex: Int {
         modelData.landMarks.firstIndex(where: { $0.id == landmark.id })!
             
     }
@@ -50,7 +50,8 @@ struct LandmarkDetail: View {
                 Text(landmark.description)
             }
             .padding()
-        }.navigationTitle("Details")
+        }
+        .navigationTitle("Details")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

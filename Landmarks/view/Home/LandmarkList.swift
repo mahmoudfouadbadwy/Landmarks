@@ -25,8 +25,7 @@ struct LandmarkList: View {
                     Text("Show Favorites Only")
                 }
                 ForEach(filteredLandmarks) {  landmark in
-                    NavigationLink(
-                        destination: LandmarkDetail(landmark: landmark)) {
+                    NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
                         LandmarkRow(landmark: landmark)
                             .contextMenu {
                                 Button(action : {
@@ -34,7 +33,7 @@ struct LandmarkList: View {
                                 }) {
                                     HStack {
                                         Text(landmark.isFavorite ?
-                                                "Un Favorite" : "Favorite")
+                                             "Un Favorite" : "Favorite")
                                         Image(systemName: landmark.isFavorite ? "star.fill": "star")
                                             .foregroundColor(landmark.isFavorite ? Color.yellow : Color.gray)
                                     }
@@ -58,6 +57,7 @@ struct LandmarkList: View {
 
 struct LandmarkList_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkList().environmentObject(ModelData())
+        LandmarkList()
+            .environmentObject(ModelData())
     }
 }
