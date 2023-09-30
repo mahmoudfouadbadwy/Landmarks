@@ -20,29 +20,33 @@ struct LandmarkList: View {
     var body: some View {
         
         NavigationView {
-            List {
-                Toggle(isOn: $showFavoritesOnly) {
-                    Text("Show Favorites Only")
-                }
-                ForEach(filteredLandmarks) {  landmark in
-                    NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
-                        LandmarkRow(landmark: landmark)
-                            .contextMenu {
-                                Button(action : {
-                                    self.setFavorite(item: landmark)
-                                }) {
-                                    HStack {
-                                        Text(landmark.isFavorite ?
-                                             "Un Favorite" : "Favorite")
-                                        Image(systemName: landmark.isFavorite ? "star.fill": "star")
-                                            .foregroundColor(landmark.isFavorite ? Color.yellow : Color.gray)
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVStack {
+                    Toggle(isOn: $showFavoritesOnly) {
+                        Text("Show Favorites Only")
+                    }
+                    ForEach(filteredLandmarks) {  landmark in
+                        NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
+                            LandmarkRow(landmark: landmark)
+                                .contextMenu {
+                                    Button(action : {
+                                        self.setFavorite(item: landmark)
+                                    }) {
+                                        HStack {
+                                            Text(landmark.isFavorite ?
+                                                 "Un Favorite" : "Favorite")
+                                            Image(systemName: landmark.isFavorite ? "star.fill": "star")
+                                                .foregroundColor(landmark.isFavorite ? Color.yellow : Color.gray)
+                                        }
                                     }
                                 }
-                            }
+                        }
                     }
                 }
             }
+            .padding(20)
             .navigationTitle("Landmarks")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
