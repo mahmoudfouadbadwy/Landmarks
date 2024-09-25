@@ -39,6 +39,13 @@ struct LandmarkList: View {
                                                 .foregroundColor(landmark.isFavorite ? Color.yellow : Color.gray)
                                         }
                                     }
+                                    
+                                    Button {
+                                        self.deleteLandmark(item: landmark)
+                                    } label: {
+                                        Text("Delete")
+                                    }
+                                    
                                 }
                         }
                     }
@@ -55,6 +62,12 @@ struct LandmarkList: View {
         if let index = self.modelData.landMarks
             .firstIndex(where: {$0.id == landmark.id}) {
             self.modelData.landMarks[index].isFavorite.toggle()
+        }
+    }
+    
+    private func deleteLandmark(item landmark: Landmark) {
+        self.modelData.landMarks = self.modelData.landMarks.filter{
+            $0.id != landmark.id
         }
     }
 }
